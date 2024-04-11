@@ -9,8 +9,12 @@ import (
 )
 
 func main() {
-	database.ConnectToDatabase()
-	log.Println("Database connection successful!")
+	err := database.ConnectToDatabase()
+	if err != nil {
+		log.Fatal("failed to connect to database", err)
+	} else {
+		log.Println("Database connection successful!")
+	}
 
 	router := gin.Default()
 
