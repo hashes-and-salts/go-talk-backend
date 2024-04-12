@@ -1,6 +1,7 @@
 services:
   postgres:
     image: postgres:latest
+    container_name: postgres_database
     restart: always
     ports:
       - 6000:5432
@@ -18,6 +19,7 @@ services:
 
   backend:
     build: .
+    container_name: gotalk_server
     depends_on:
       postgres:
         condition: service_healthy
