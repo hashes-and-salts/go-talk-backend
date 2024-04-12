@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"go-talk/src/models"
 	"log"
 	"os"
 	"time"
@@ -10,6 +11,8 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
+
+var DB *gorm.DB
 
 func ConnectToDatabase() error {
 	err := godotenv.Load(".env")
@@ -29,7 +32,7 @@ func ConnectToDatabase() error {
 
 		log.Println(fmt.Sprintf("Database connection attempt %d\n", attempt))
 
-		_, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+		DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 		if err == nil {
 			log.Println("Database connection successful")
 			return nil
@@ -43,4 +46,8 @@ func ConnectToDatabase() error {
 	log.Fatal(fmt.Sprintf("failed to connect to database after %d attempts\n", maxAttempts))
 
 	return err
+}
+
+func AutoMigrate() {
+	DB.AutoMigrate(models.User{})
 }
