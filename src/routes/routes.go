@@ -7,12 +7,17 @@ import (
 )
 
 func SetupRoutes(engine *gin.Engine) {
+
+	// test
+	engine.GET("/ping", controller.PONG)
+
 	// user
-	engine.GET("/login", controller.UserLoginHandler)
-	engine.GET("/create-post", controller.UserCreatePostHandler)
+	engine.POST("/register", controller.UserRegisterHandler)
+	engine.POST("/login", controller.UserLoginHandler)
+	engine.POST("/create-post", controller.UserCreatePostHandler)
 	engine.GET("/get-online-users", controller.UserGetOnlineFriendsHandler)
 
 	// admin
-	engine.GET("/admin-login", controller.AdminLoginHandler)
+	engine.POST("/admin-login", controller.AdminLoginHandler)
 	engine.GET("/delete-user", controller.AdminDeleteUserHandler)
 }

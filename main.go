@@ -15,6 +15,7 @@ func main() {
 	} else {
 		log.Println("Database connection successful!")
 	}
+	database.AutoMigrate()
 
 	router := gin.Default()
 
