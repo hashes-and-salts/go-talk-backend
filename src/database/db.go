@@ -49,5 +49,5 @@ func ConnectToDatabase() error {
 }
 
 func AutoMigrate() {
-	DB.AutoMigrate(models.User{})
+	DB.AutoMigrate(&models.User{})
 }
